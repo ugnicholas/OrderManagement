@@ -1,4 +1,4 @@
-﻿using OrderManagement.Domain.Entities.Product;
+﻿using OrderManagement.Domain.Entities.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrderManagement.Application.Interfaces
 {
-    public interface IProductRepository: IRepository<Product>
+    public interface ICustomerRepository: IRepository<Customer>
     {
     }
 }

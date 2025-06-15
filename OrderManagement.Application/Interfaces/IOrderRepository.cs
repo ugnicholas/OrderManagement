@@ -9,5 +9,6 @@ namespace OrderManagement.Application.Interfaces
 {
     public interface IOrderRepository: IRepository<Order>
     {
+        Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(Guid customerId);
     }
 }
