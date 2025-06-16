@@ -9,7 +9,7 @@ This project is a monolithic Order Management API built using **.NET 8**, **Enti
 The project follows a **Clean Architecture** pattern with the following layers:
 - **API Layer** (`OrderManagement.Api`): Contains controllers and startup logic.
 - **Application Layer** (`OrderManagement.Application`): Contains business logic, commands, and queries (MediatR).
-- **Domain Layer** (`OrderManagement.Domain`): Containing Domain Entities
+- **Domain Layer** (`OrderManagement.Domain`): Contains Domain Entities
 - **Infrastructure Layer** (`OrderManagement.Infrastructure`): Handles database access, service implementations, and shared utilities.
 - **Test Layer** (`OrderManagement.Test`): Contains unit and integration tests.
 
