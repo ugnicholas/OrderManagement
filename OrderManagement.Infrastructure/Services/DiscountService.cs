@@ -20,7 +20,7 @@ namespace OrderManagement.Infrastructure.Services
             switch (customer.Segment)
             {
                 case CustomerSegment.Regular:
-                    if (totalSpent > 1000)
+                    if (totalSpent > 500)
                         discount = order.Total * 0.05m;
                     break;
                 case CustomerSegment.Premium:
@@ -28,8 +28,6 @@ namespace OrderManagement.Infrastructure.Services
                     break;
                 case CustomerSegment.VIP:
                     discount = order.Total * 0.15m;
-                    if (totalSpent > 5000)
-                        discount += 10; // extra fixed discount
                     break;
             }
 
