@@ -2,11 +2,6 @@
 using OrderManagement.Domain.Entities.Customer;
 using OrderManagement.Domain.Entities.Order;
 using OrderManagement.Domain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderManagement.Infrastructure.Services
 {
@@ -20,7 +15,7 @@ namespace OrderManagement.Infrastructure.Services
             switch (customer.Segment)
             {
                 case CustomerSegment.Regular:
-                    if (totalSpent > 1000)
+                    if (totalSpent > 500)
                         discount = order.Total * 0.05m;
                     break;
                 case CustomerSegment.Premium:
@@ -28,8 +23,6 @@ namespace OrderManagement.Infrastructure.Services
                     break;
                 case CustomerSegment.VIP:
                     discount = order.Total * 0.15m;
-                    if (totalSpent > 5000)
-                        discount += 10; // extra fixed discount
                     break;
             }
 

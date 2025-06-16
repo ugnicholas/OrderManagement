@@ -13,10 +13,11 @@ namespace OrderManagement.Infrastructure.Repositories
             _dbContext = context;
         }
 
-        // Custom method only for Order
+        // Custom methods only for Order
         public async Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(Guid customerId)
         {
             return await _dbContext.Orders
+                .AsNoTracking() // performance optimization
                 .Include(o => o.Items)
                 .Include(o => o.StatusHistory)
                 .Where(o => o.CustomerId == customerId)
@@ -33,6 +34,7 @@ namespace OrderManagement.Infrastructure.Repositories
         public async Task<List<Order>> GetAllWithStatusHistoryAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Orders
+                .AsNoTracking() // performance optimization
                 .Include(o => o.StatusHistory)
                 .ToListAsync(cancellationToken);
         }
