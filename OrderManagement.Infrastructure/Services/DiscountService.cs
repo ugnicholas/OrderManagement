@@ -9,13 +9,13 @@ namespace OrderManagement.Infrastructure.Services
     {
         public decimal CalculateDiscount(Customer customer, Order order)
         {
-            var totalSpent = customer.Orders.Sum(o => o.Total);
+            var totalSpent = customer.Orders?.Sum(o => o.Total) ?? 0;
             decimal discount = 0;
 
             switch (customer.Segment)
             {
                 case CustomerSegment.Regular:
-                    if (totalSpent > 500)
+                    if (totalSpent > 500 || order.Total > 500)
                         discount = order.Total * 0.05m;
                     break;
                 case CustomerSegment.Premium:

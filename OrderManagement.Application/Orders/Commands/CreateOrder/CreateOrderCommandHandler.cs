@@ -29,7 +29,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Gui
     public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         // 1. Load the customer
-        var customer = await _customerRepository.GetByIdAsync(request.CustomerId) ?? throw new Exception("Customer not found");
+        var customer = await _customerRepository.GetByIdWithOrdersAsync(request.CustomerId) ?? throw new Exception("Customer not found");
 
         // 2. Create the Order and calculate total
         var order = new Order
