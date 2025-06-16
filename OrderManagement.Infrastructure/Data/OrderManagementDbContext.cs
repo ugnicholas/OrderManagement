@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrderManagement.Application.Interfaces;
 using OrderManagement.Domain.Common;
+using OrderManagement.Domain.Entities.Customer;
 using OrderManagement.Domain.Entities.Order;
 using OrderManagement.Domain.Entities.Product;
 using System;
@@ -27,6 +28,7 @@ namespace OrderManagement.Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<OrderStatusHistory> OrderStatus { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
