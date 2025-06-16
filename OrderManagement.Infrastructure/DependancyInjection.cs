@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderManagement.Application.Interfaces;
-using OrderManagement.Infrastructure.Data;
 using OrderManagement.Infrastructure.Repositories;
 using OrderManagement.Infrastructure.Services;
 

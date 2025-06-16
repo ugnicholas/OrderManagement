@@ -13,7 +13,7 @@ namespace OrderManagement.Infrastructure.Repositories
             _dbContext = context;
         }
 
-        // Custom method only for Order
+        // Custom methods only for Order
         public async Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(Guid customerId)
         {
             return await _dbContext.Orders
