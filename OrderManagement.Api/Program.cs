@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using OrderManagement.Application.Interfaces;
+using OrderManagement.Application.Mapping;
+using OrderManagement.Application.Orders.Commands.CreateOrder;
 using OrderManagement.Infrastructure;
 using OrderManagement.Infrastructure.Data;
 using OrderManagement.Infrastructure.Shared;
@@ -12,8 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUserContext, UserContext>();
 
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+
 builder.Services.AddDbContext<OrderManagementDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(CreateOrderCommand).Assembly));
 
 builder.Services.AddHttpContextAccessor();
 // Inject services
@@ -50,7 +57,11 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "Order Management API", Version = "v1" });
+    c.EnableAnnotations();
+});
 
 var app = builder.Build();
 

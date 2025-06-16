@@ -1,4 +1,5 @@
 ﻿using OrderManagement.Domain.Common;
+using OrderManagement.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,19 @@ namespace OrderManagement.Domain.Entities.Order
     public class Order : BaseEntity
     {
         private ICollection<OrderItem> _orderItems;
-        private ICollection<OrderStatus> _statusHistory;
+        private ICollection<OrderStatusHistory> _statusHistory;
 
         public Guid CustomerId { get; set; }
 
-        public int StatusId { get; set; }
+        public OrderStatus StatusId { get; set; }
 
         public decimal Discount { get; set; }
 
         public decimal Total { get; set; }
 
-        public virtual ICollection<OrderStatus> StatusHistory
+        public virtual ICollection<OrderStatusHistory> StatusHistory
         {
-            get => _statusHistory ??= new List<OrderStatus>();
+            get => _statusHistory ??= new List<OrderStatusHistory>();
             protected set => _statusHistory = value;
         }
 

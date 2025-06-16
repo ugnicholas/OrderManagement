@@ -26,7 +26,7 @@ namespace OrderManagement.Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<OrderStatus> OrderStatus { get; set; }
+        public DbSet<OrderStatusHistory> OrderStatus { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -40,6 +40,9 @@ namespace OrderManagement.Infrastructure.Data
                 switch (entry.State)
                 {
                     case EntityState.Added:
+                        if (entry.Entity.Id == Guid.Empty)
+                            entry.Entity.Id = Guid.NewGuid();
+
                         entry.Entity.CreatedAt = now;
                         entry.Entity.CreatedBy = userId;
                         break;
