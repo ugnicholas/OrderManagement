@@ -11,7 +11,6 @@ namespace OrderManagement.Application.Orders.Commands.CreateOrder
     public class CreateOrderCommand : IRequest<Guid>
     {
         public Guid CustomerId { get; set; }
-        public decimal Discount { get; set; }
         public List<OrderItemDto> Items { get; set; } = new();
     }
 }
