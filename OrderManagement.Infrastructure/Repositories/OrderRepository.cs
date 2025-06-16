@@ -22,5 +22,19 @@ namespace OrderManagement.Infrastructure.Repositories
                 .Where(o => o.CustomerId == customerId)
                 .ToListAsync();
         }
+
+        public async Task<Order?> GetByIdWithStatusHistoryAsync(Guid orderId)
+        {
+            return await _dbContext.Orders
+                .Include(o => o.StatusHistory)
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+        }
+
+        public async Task<List<Order>> GetAllWithStatusHistoryAsync(CancellationToken cancellationToken = default)
+        {
+            return await _dbContext.Orders
+                .Include(o => o.StatusHistory)
+                .ToListAsync(cancellationToken);
+        }
     }
 }

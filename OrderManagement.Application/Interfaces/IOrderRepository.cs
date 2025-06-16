@@ -9,6 +9,10 @@ namespace OrderManagement.Application.Interfaces
 {
     public interface IOrderRepository: IRepository<Order>
     {
+        Task<List<Order>> GetAllWithStatusHistoryAsync(CancellationToken cancellationToken = default);
+
         Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(Guid customerId);
+
+        Task<Order?> GetByIdWithStatusHistoryAsync(Guid orderId);
     }
 }

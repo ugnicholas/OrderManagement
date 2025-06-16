@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace OrderManagement.Domain.Entities.Order
 {
-    public class OrderStatus : BaseEntity
+    public class OrderStatusHistory : BaseEntity
     {
         public Guid OrderId { get; set; }
 
-        public int Name { get; set; }
+        public OrderStatus Name { get; set; }
     }
 }

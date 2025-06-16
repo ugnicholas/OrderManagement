@@ -15,27 +15,34 @@ namespace OrderManagement.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            // Validate user here...
-            var claims = new[]
+            if (request.Email == "admin@gmail.com" && request.Password == "admin123")
+            {
+                var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, "3f3179b2-a33b-4b99-ac28-35b7002adf75"),
                 new Claim(ClaimTypes.Email, request.Email)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ordermgtsecret"));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("thisisaverystrongsecretkey123456!"));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: "OrderManagementApi",
-                audience: "OrderManagementClient",
-                claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
-                signingCredentials: creds);
+                var token = new JwtSecurityToken(
+                    issuer: "OrderManagementApi",
+                    audience: "OrderManagementClient",
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddHours(1),
+                    signingCredentials: creds);
 
-            return Ok(new
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                });
+            }
+            else
             {
-                token = new JwtSecurityTokenHandler().WriteToken(token)
-            });
+                return Unauthorized();
+            }
+            
         }
     }
 }
