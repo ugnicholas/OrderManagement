@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderManagement.Domain.Entities
+namespace OrderManagement.Domain.Enum
 {
-    internal class Order
+    public enum CustomerSegment
     {
+        Regular,
+        Premium,
+        VIP
     }
 }
